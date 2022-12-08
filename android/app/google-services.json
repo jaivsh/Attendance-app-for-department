@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "977762191473",
+    "project_id": "attendance-app--vnit",
+    "storage_bucket": "attendance-app--vnit.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:977762191473:android:448391a28caabe8b4af3d0",
+        "android_client_info": {
+          "package_name": "com.example.attendance_app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "977762191473-3t08m7bfr8e0hotrhpqm6q4lrpc0q5v8.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDlxF4DCu2VhUHGnpQcRhVJvpHZzCd-n14"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "977762191473-3t08m7bfr8e0hotrhpqm6q4lrpc0q5v8.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
