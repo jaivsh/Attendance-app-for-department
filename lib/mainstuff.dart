@@ -1,6 +1,7 @@
 import 'package:attendance_app/login_screen.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class MainScreen1 extends StatefulWidget {
   const MainScreen1({super.key});
@@ -23,56 +24,90 @@ class _MainScreenState extends State<MainScreen1> {
         padding: const EdgeInsets.all(15),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.start,
-          crossAxisAlignment: CrossAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Row(
-              mainAxisAlignment: MainAxisAlignment.start,
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: const [
-                Text(
-                  'Professor:',
-                  style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
-                ),
-                Text(
-                  ' Dr. Ritesh Lokhande',
-                  style: TextStyle(fontSize: 20),
-                )
-              ],
+            Material(
+              elevation: 15,
+              borderRadius:
+                  const BorderRadius.only(topLeft: Radius.circular(50)),
+              child: Container(
+                height: 110,
+                width: (MediaQuery.of(context).size.width) / 1.1,
+                decoration: const BoxDecoration(
+                    color: Colors.blueAccent,
+                    borderRadius:
+                        BorderRadius.only(topLeft: Radius.circular(50))),
+                child: Container(
+                    padding: const EdgeInsets.only(
+                        left: 10, right: 10, bottom: 5, top: 5),
+                    child: Column(children: [
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.end,
+                        crossAxisAlignment: CrossAxisAlignment.end,
+                        children: [
+                          Text(
+                            'Professor:',
+                            style: GoogleFonts.lato(
+                                textStyle: const TextStyle(
+                                    fontSize: 20,
+                                    fontWeight: FontWeight.bold,
+                                    color: Colors.white)),
+                          ),
+                          Text(
+                            ' Dr. Ritesh Lokhande',
+                            style: GoogleFonts.lato(
+                                textStyle: const TextStyle(
+                                    fontSize: 20, color: Colors.white)),
+                          )
+                        ],
+                      ),
+                      Container(
+                          padding: const EdgeInsets.only(top: 10),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.end,
+                            crossAxisAlignment: CrossAxisAlignment.end,
+                            children: [
+                              Text(
+                                'Total Classes Attended:',
+                                style: GoogleFonts.lato(
+                                    textStyle: const TextStyle(
+                                        fontSize: 20,
+                                        fontWeight: FontWeight.bold,
+                                        color: Colors.white)),
+                              ),
+                              Text(
+                                ' 12/15',
+                                style: GoogleFonts.lato(
+                                    textStyle: const TextStyle(
+                                        fontSize: 20, color: Colors.white)),
+                              )
+                            ],
+                          )),
+                      Container(
+                          padding: const EdgeInsets.only(top: 10),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.end,
+                            crossAxisAlignment: CrossAxisAlignment.end,
+                            children: [
+                              Text(
+                                'Attendance Percentage:',
+                                style: GoogleFonts.lato(
+                                    textStyle: const TextStyle(
+                                        fontSize: 20,
+                                        fontWeight: FontWeight.bold,
+                                        color: Colors.white)),
+                              ),
+                              Text(
+                                ' 80.0 %',
+                                style: GoogleFonts.lato(
+                                    textStyle: const TextStyle(
+                                        fontSize: 20, color: Colors.white)),
+                              )
+                            ],
+                          ))
+                    ])),
+              ),
             ),
-            Container(
-                padding: const EdgeInsets.only(top: 10),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: const [
-                    Text(
-                      'Total Classes Attended:',
-                      style:
-                          TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
-                    ),
-                    Text(
-                      ' 12/15',
-                      style: TextStyle(fontSize: 20),
-                    )
-                  ],
-                )),
-            Container(
-                padding: const EdgeInsets.only(top: 10),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: const [
-                    Text(
-                      'Attendance Percentage:',
-                      style:
-                          TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
-                    ),
-                    Text(
-                      ' 80.0 %',
-                      style: TextStyle(fontSize: 20),
-                    )
-                  ],
-                )),
             Flexible(
                 child: SingleChildScrollView(
                     scrollDirection: Axis.horizontal,
@@ -95,6 +130,20 @@ class _MainScreenState extends State<MainScreen1> {
                     ], rows: const [
                       DataRow(cells: [
                         DataCell(Text('1')),
+                        DataCell(Text('2/1/23')),
+                        DataCell(Text('P')),
+                        DataCell(Text('-')),
+                        DataCell(Text('12:29:12 PM'))
+                      ]),
+                      DataRow(cells: [
+                        DataCell(Text('2')),
+                        DataCell(Text('2/1/23')),
+                        DataCell(Text('-')),
+                        DataCell(Text('A')),
+                        DataCell(Text('12:29:12 PM'))
+                      ]),
+                      DataRow(cells: [
+                        DataCell(Text('3')),
                         DataCell(Text('2/1/23')),
                         DataCell(Text('P')),
                         DataCell(Text('A')),

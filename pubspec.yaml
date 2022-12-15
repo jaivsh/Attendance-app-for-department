@@ -46,6 +46,7 @@ dependencies:
   cloud_firestore: ^4.2.0
   amplify_flutter: ^0.6.0
   amplify_datastore: ^0.6.0
+  google_fonts: ^3.0.1
   
 
 dev_dependencies:
@@ -77,7 +78,8 @@ flutter:
   fonts:
     - family: OpenSans
       fonts:
-        - asset: assets/fonts/OpenSans.ttf  
+        - asset: assets/fonts/OpenSans.ttf 
+        - asset: assets/fonts/Roboto 
   #   - images/a_dot_ham.jpeg
 
   # An image asset can refer to one or more resolution-specific "variants", see
