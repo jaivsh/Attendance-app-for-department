@@ -61,6 +61,10 @@ android {
             signingConfig signingConfigs.debug
         }
     }
+
+    configurations {
+        all*.exclude group: 'androidx.lifecycle', module: 'lifecycle-viewmodel' 
+    }
 }
 
 flutter {

@@ -1,15 +1,13 @@
 import 'package:attendance_app/login_screen.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
-import 'package:amplify_flutter/amplify_flutter.dart';
-import 'package:amplify_datastore/amplify_datastore.dart';
 import 'package:splashscreen/splashscreen.dart';
 
-class MyApp extends StatelessWidget {
-  MyApp({super.key});
+void main() {
+  runApp(const MyApp());
+}
 
-  bool _amplifyConfigured = false;
+class MyApp extends StatelessWidget {
+  const MyApp({super.key});
 
   // This widget is the root of your application.
   @override
