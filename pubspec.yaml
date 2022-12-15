@@ -41,6 +41,12 @@ dependencies:
   sqflite: ^2.2.2
   firebase_auth: ^4.1.5
   local_auth: ^2.1.2
+  flutter_swiper: ^1.1.6
+  carousel_slider: ^4.2.0
+  cloud_firestore: ^4.2.0
+  amplify_flutter: ^0.6.0
+  amplify_datastore: ^0.6.0
+  
 
 dev_dependencies:
   flutter_test:
