@@ -1,4 +1,5 @@
 import 'package:attendance_app/login_screen.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:attendance_app/utilities/constants.dart';
@@ -10,13 +11,14 @@ class RegScreen extends StatefulWidget {
 
 class _RegScreenState extends State<RegScreen> {
   bool _rememberMe = false;
+  List<String> tobesent = [" ", " ", " ", " "];
 
   Widget _buildEmailTF() {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: <Widget>[
         Text(
-          'Enrollment',
+          'Enter Enrollment',
           style: kLabelStyle,
         ),
         SizedBox(height: 10.0),
@@ -25,6 +27,9 @@ class _RegScreenState extends State<RegScreen> {
           decoration: kBoxDecorationStyle,
           height: 60.0,
           child: TextField(
+            onChanged: (value) {
+              tobesent[0] = value;
+            },
             keyboardType: TextInputType.text,
             style: TextStyle(
               color: Colors.white,
@@ -34,7 +39,7 @@ class _RegScreenState extends State<RegScreen> {
               border: InputBorder.none,
               contentPadding: EdgeInsets.only(top: 14.0),
               prefixIcon: Icon(
-                Icons.abc_outlined,
+                Icons.person,
                 color: Colors.white,
               ),
               hintText: 'Enter your enrollment number',
@@ -51,7 +56,7 @@ class _RegScreenState extends State<RegScreen> {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: <Widget>[
         Text(
-          'Password',
+          'Create a Password',
           style: kLabelStyle,
         ),
         SizedBox(height: 10.0),
@@ -60,7 +65,86 @@ class _RegScreenState extends State<RegScreen> {
           decoration: kBoxDecorationStyle,
           height: 60.0,
           child: TextField(
+            onChanged: (value) {
+              tobesent[1] = value;
+            },
             obscureText: true,
+            style: const TextStyle(
+              color: Colors.white,
+              fontFamily: 'OpenSans',
+            ),
+            decoration: InputDecoration(
+              border: InputBorder.none,
+              contentPadding: const EdgeInsets.only(top: 14.0),
+              prefixIcon: const Icon(
+                Icons.lock,
+                color: Colors.white,
+              ),
+              hintText: 'Type a password',
+              hintStyle: kHintTextStyle,
+            ),
+          ),
+        ),
+      ],
+    );
+  }
+
+  Widget _buildNameTF() {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: <Widget>[
+        Text(
+          'Enter your Name',
+          style: kLabelStyle,
+        ),
+        const SizedBox(height: 10.0),
+        Container(
+          alignment: Alignment.centerLeft,
+          decoration: kBoxDecorationStyle,
+          height: 60.0,
+          child: TextField(
+            onChanged: (value) {
+              tobesent[2] = value;
+            },
+            obscureText: true,
+            style: const TextStyle(
+              color: Colors.white,
+              fontFamily: 'OpenSans',
+            ),
+            decoration: InputDecoration(
+              border: InputBorder.none,
+              contentPadding: const EdgeInsets.only(top: 14.0),
+              prefixIcon: const Icon(
+                Icons.abc_rounded,
+                color: Colors.white,
+              ),
+              hintText: 'Type your name',
+              hintStyle: kHintTextStyle,
+            ),
+          ),
+        ),
+      ],
+    );
+  }
+
+  Widget _buildDOBTF() {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: <Widget>[
+        Text(
+          'Enter Date of Birth',
+          style: kLabelStyle,
+        ),
+        SizedBox(height: 10.0),
+        Container(
+          alignment: Alignment.centerLeft,
+          decoration: kBoxDecorationStyle,
+          height: 60.0,
+          child: TextField(
+            onChanged: (value) {
+              tobesent[3] = value;
+            },
+            keyboardType: TextInputType.datetime,
             style: TextStyle(
               color: Colors.white,
               fontFamily: 'OpenSans',
@@ -69,16 +153,21 @@ class _RegScreenState extends State<RegScreen> {
               border: InputBorder.none,
               contentPadding: EdgeInsets.only(top: 14.0),
               prefixIcon: Icon(
-                Icons.lock,
+                Icons.person,
                 color: Colors.white,
               ),
-              hintText: 'Enter your Password',
+              hintText: 'Enter your date of birth',
               hintStyle: kHintTextStyle,
             ),
           ),
         ),
       ],
     );
+  }
+
+  Future ConnectToFirestore() async {
+    CollectionReference ref =
+        FirebaseFirestore.instance.collection('student-side');
   }
 
   Widget _buildForgotPasswordBtn() {
@@ -126,7 +215,9 @@ class _RegScreenState extends State<RegScreen> {
       padding: EdgeInsets.symmetric(vertical: 25.0),
       width: double.infinity,
       child: ElevatedButton(
-        onPressed: () => print('Login Button Pressed'),
+        onPressed: () {
+          print(tobesent);
+        },
         style: ElevatedButton.styleFrom(
             padding: EdgeInsets.all(15.0),
             shape: RoundedRectangleBorder(
@@ -207,7 +298,7 @@ class _RegScreenState extends State<RegScreen> {
         );
       },
       child: RichText(
-        text: TextSpan(
+        text: const TextSpan(
           children: [
             TextSpan(
               text: 'Don\'t have an Account? ',
@@ -276,7 +367,7 @@ class _RegScreenState extends State<RegScreen> {
                         width: 200,
                       ),
                       const Text(
-                        'Register',
+                        'Student Register',
                         style: TextStyle(
                           color: Colors.white,
                           fontFamily: 'OpenSans',
@@ -290,8 +381,14 @@ class _RegScreenState extends State<RegScreen> {
                         height: 30.0,
                       ),
                       _buildPasswordTF(),
-                      _buildForgotPasswordBtn(),
-                      _buildRememberMeCheckbox(),
+                      SizedBox(
+                        height: 30.0,
+                      ),
+                      _buildNameTF(),
+                      SizedBox(
+                        height: 30.0,
+                      ),
+                      _buildDOBTF(),
                       _buildLoginBtn(),
                       _buildSignInWithText(),
                     ],
