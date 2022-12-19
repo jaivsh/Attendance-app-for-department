@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:attendance_app/utilities/constants.dart';
 import 'package:flutter_swiper/flutter_swiper.dart';
+import 'package:google_nav_bar/google_nav_bar.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -15,6 +16,7 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
+  Color _favIconColor = Colors.deepPurpleAccent;
   int _currentIndex = 0;
   static double currentatt = 0.50;
 
@@ -32,27 +34,67 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      bottomNavigationBar: GNav(
+          gap: 10,
+          backgroundColor: Colors.deepPurpleAccent,
+          color: Colors.white,
+          activeColor: Colors.amberAccent,
+          tabs: [
+            GButton(
+              icon: Icons.home,
+              text: 'Home',
+            ),
+            GButton(
+              icon: Icons.settings,
+              text: 'Settings',
+            ),
+          ]),
       extendBodyBehindAppBar: false,
       appBar: AppBar(
+        actions: [
+          IconButton(
+            onPressed: () {
+              setState(() {
+                if (_favIconColor == Colors.deepPurpleAccent) {
+                  _favIconColor = Colors.black;
+                } else {
+                  _favIconColor = Colors.deepPurpleAccent;
+                }
+              });
+            },
+            icon: Icon(
+              Icons.notifications_active,
+              color: _favIconColor,
+            ),
+            color: Colors.black,
+            tooltip: 'Show notifications',
+            highlightColor: Colors.black,
+          )
+        ],
         elevation: 0,
         backgroundColor: Colors.transparent,
-        leading: Padding(
-          padding: EdgeInsets.all(11.0),
-          child: ClipOval(
-            child: Image(
-              image: AssetImage('assets/images/waving_hand.png'),
+        title: Row(
+          children: const [
+            Text(
+              'Hi, Jaivardhan',
+              style: TextStyle(
+                  fontWeight: FontWeight.bold,
+                  color: Colors.black,
+                  fontSize: 20),
             ),
-          ),
-        ),
-        title: const Text(
-          'Hi, BT21MIN001',
-          style: TextStyle(fontWeight: FontWeight.bold, color: Colors.black),
+            //Image(
+            //image: AssetImage('assets/images/waving_hand.png'),
+            //),
+          ],
         ),
         centerTitle: false,
       ),
       body: Scaffold(
           body: Column(
         children: <Widget>[
+          const SizedBox(
+            height: 5,
+          ),
           CarouselSlider(
             options: CarouselOptions(
               height: 170.0,
@@ -103,15 +145,15 @@ class _HomeScreenState extends State<HomeScreen> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               mainAxisAlignment: MainAxisAlignment.start,
-              children: [
-                const Text(
+              children: const [
+                Text(
                   'All Courses Enrolled',
                   style: TextStyle(fontWeight: FontWeight.bold),
                 ),
               ],
             ),
           ),
-          SizedBox(
+          const SizedBox(
             height: 30,
           ),
           Expanded(
@@ -229,14 +271,14 @@ class Item1 extends StatelessWidget {
                                   color: Colors.black,
                                   fontWeight: FontWeight.bold),
                             ),
-                            SizedBox(
+                            const SizedBox(
                               height: 10,
                             ),
                             Text(
                               'Total classes: ${curatt * 100}',
                               style: const TextStyle(color: Colors.black),
                             ),
-                            SizedBox(
+                            const SizedBox(
                               height: 10,
                             ),
                             Text(
@@ -367,7 +409,7 @@ class Item3 extends StatelessWidget {
             children: <Widget>[
               const Text("Underground Metalliferous Mining",
                   style: TextStyle(
-                      color: Colors.black,
+                      color: Color.fromRGBO(0, 0, 0, 1),
                       fontSize: 20.0,
                       fontWeight: FontWeight.bold)),
               Container(
@@ -377,10 +419,10 @@ class Item3 extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.center,
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
-                      CircularProgressIndicator(
+                      const CircularProgressIndicator(
                         value: 0.4,
-                        backgroundColor: const Color.fromARGB(255, 0, 0, 0),
-                        valueColor: const AlwaysStoppedAnimation(
+                        backgroundColor: Color.fromARGB(255, 0, 0, 0),
+                        valueColor: AlwaysStoppedAnimation(
                             Color.fromARGB(255, 255, 208, 0)),
                         strokeWidth: 12,
                       ),

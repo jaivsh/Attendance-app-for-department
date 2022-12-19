@@ -2,6 +2,7 @@ import 'package:attendance_app/login_screen.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:google_nav_bar/google_nav_bar.dart';
 
 class MainScreen1 extends StatefulWidget {
   const MainScreen1({super.key});
@@ -14,6 +15,25 @@ class _MainScreenState extends State<MainScreen1> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      bottomNavigationBar: GNav(
+          gap: 10,
+          backgroundColor: Colors.deepPurpleAccent,
+          color: Colors.white,
+          activeColor: Colors.amberAccent,
+          tabs: [
+            GButton(
+              icon: Icons.home,
+              text: 'Home',
+            ),
+            GButton(
+              icon: Icons.favorite_outline,
+              text: 'Favorites',
+            ),
+            GButton(
+              icon: Icons.settings,
+              text: 'Settings',
+            ),
+          ]),
       appBar: AppBar(
         title: const Text('IMT(DC)'),
         elevation: 0,
@@ -34,7 +54,7 @@ class _MainScreenState extends State<MainScreen1> {
                 height: 110,
                 width: (MediaQuery.of(context).size.width) / 1.1,
                 decoration: const BoxDecoration(
-                    color: Colors.blueAccent,
+                    color: Colors.deepPurpleAccent,
                     borderRadius:
                         BorderRadius.only(topLeft: Radius.circular(50))),
                 child: Container(

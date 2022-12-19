@@ -1,8 +1,12 @@
+import 'dart:ffi';
+
 import 'package:attendance_app/login_screen.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:splashscreen/splashscreen.dart';
 
-void main() {
+void main() async {
   runApp(const MyApp());
 }
 
@@ -12,7 +16,7 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return const MaterialApp(
+    return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'Flutter Demo',
       home: mainstuff(),
@@ -21,13 +25,37 @@ class MyApp extends StatelessWidget {
 }
 
 class mainstuff extends StatefulWidget {
-  const mainstuff({super.key});
+  mainstuff({super.key});
+
+  late DocumentSnapshot snapshot;
 
   @override
   State<mainstuff> createState() => _mainstuffState();
 }
 
 class _mainstuffState extends State<mainstuff> {
+  
+
+  List userslist = [];
+  
+  void getlogindata() async {
+      await FirebaseFirestore.instance
+        .collection('student-side')
+        .get()
+        .then((querySnapshot) {
+      querySnapshot.docs.forEach((element) {
+        userslist.add(element);
+      });
+    });
+    print('List is here: ${userslist}');
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    getlogindata();
+  }
+
   @override
   Widget build(BuildContext context) {
     return SplashScreen(
