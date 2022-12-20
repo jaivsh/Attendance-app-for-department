@@ -1,4 +1,5 @@
 import 'package:attendance_app/mainstuff.dart';
+import 'package:attendance_app/prof_alerts.dart';
 import 'package:attendance_app/register_screen.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/cupertino.dart';
@@ -6,6 +7,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:attendance_app/utilities/constants.dart';
 import 'package:flutter_swiper/flutter_swiper.dart';
+import 'package:getwidget/components/carousel/gf_carousel.dart';
 import 'package:google_nav_bar/google_nav_bar.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -34,7 +36,7 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      bottomNavigationBar: GNav(
+      bottomNavigationBar: const GNav(
           gap: 10,
           backgroundColor: Colors.deepPurpleAccent,
           color: Colors.white,
@@ -76,7 +78,7 @@ class _HomeScreenState extends State<HomeScreen> {
         title: Row(
           children: const [
             Text(
-              'Hi, Jaivardhan',
+              'Hi, Jaivardhan Shukla',
               style: TextStyle(
                   fontWeight: FontWeight.bold,
                   color: Colors.black,
@@ -87,58 +89,39 @@ class _HomeScreenState extends State<HomeScreen> {
             //),
           ],
         ),
-        centerTitle: false,
+        centerTitle: true,
       ),
       body: Scaffold(
           body: Column(
         children: <Widget>[
-          const SizedBox(
-            height: 5,
-          ),
-          CarouselSlider(
-            options: CarouselOptions(
-              height: 170.0,
-              autoPlay: true,
-              autoPlayInterval: const Duration(seconds: 10),
-              autoPlayAnimationDuration: const Duration(milliseconds: 800),
-              autoPlayCurve: Curves.fastOutSlowIn,
-              pauseAutoPlayOnTouch: true,
-              aspectRatio: 2.0,
-              onPageChanged: (index, reason) {
-                setState(() {
-                  _currentIndex = index;
-                });
-              },
-            ),
+          GFCarousel(
+            autoPlay: true,
+            hasPagination: true,
+            enlargeMainPage: true,
             items: cardList.map((card) {
               return Builder(builder: (BuildContext context) {
                 return Container(
-                  height: MediaQuery.of(context).size.height * 0.30,
-                  width: MediaQuery.of(context).size.width,
-                  child: Card(
-                    color: Colors.transparent,
-                    elevation: 0,
-                    child: card,
-                  ),
-                );
+                    height: MediaQuery.of(context).size.height * 0.30,
+                    width: MediaQuery.of(context).size.width,
+                    child: ClipRRect(
+                      borderRadius:
+                          const BorderRadius.all(Radius.circular(20.0)),
+                      child: Card(
+                        color: Colors.deepPurpleAccent,
+                        elevation: 10,
+                        child: card,
+                      ),
+                    ));
               });
             }).toList(),
+            onPageChanged: (index) {
+              setState(() {
+                index;
+              });
+            },
           ),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: map<Widget>(cardList, (index, url) {
-              return Container(
-                width: 10.0,
-                height: 10.0,
-                margin:
-                    const EdgeInsets.symmetric(vertical: 10.0, horizontal: 2.0),
-                decoration: BoxDecoration(
-                  shape: BoxShape.circle,
-                  color:
-                      _currentIndex == index ? Colors.blueAccent : Colors.grey,
-                ),
-              );
-            }),
+          const SizedBox(
+            height: 2,
           ),
           Container(
             padding: const EdgeInsets.only(top: 25, left: 15, right: 15),
@@ -220,9 +203,8 @@ class Item1 extends StatelessWidget {
     return Material(
         elevation: 0,
         child: Container(
-          decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(20),
-            gradient: const LinearGradient(
+          decoration: const BoxDecoration(
+            gradient: LinearGradient(
                 begin: Alignment.topLeft,
                 end: Alignment.bottomRight,
                 stops: [
@@ -230,8 +212,8 @@ class Item1 extends StatelessWidget {
                   1
                 ],
                 colors: [
-                  Color.fromARGB(255, 134, 214, 254),
-                  Color.fromARGB(255, 7, 185, 255),
+                  Colors.deepPurple,
+                  Colors.deepPurpleAccent,
                 ]),
           ),
           child: Column(
@@ -306,7 +288,6 @@ class Item2 extends StatelessWidget {
         elevation: 0,
         child: Container(
           decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(20),
             gradient: const LinearGradient(
                 begin: Alignment.topLeft,
                 end: Alignment.bottomRight,
@@ -315,8 +296,8 @@ class Item2 extends StatelessWidget {
                   1
                 ],
                 colors: [
-                  Color.fromARGB(255, 134, 214, 254),
-                  Color.fromARGB(255, 7, 185, 255),
+                  Colors.deepPurple,
+                  Colors.deepPurpleAccent,
                 ]),
           ),
           child: Column(
@@ -390,9 +371,8 @@ class Item3 extends StatelessWidget {
     return Material(
         elevation: 0,
         child: Container(
-          decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(20),
-            gradient: const LinearGradient(
+          decoration: const BoxDecoration(
+            gradient: LinearGradient(
                 begin: Alignment.topLeft,
                 end: Alignment.bottomRight,
                 stops: [
@@ -400,8 +380,8 @@ class Item3 extends StatelessWidget {
                   1
                 ],
                 colors: [
-                  Color.fromARGB(255, 134, 214, 254),
-                  Color.fromARGB(255, 7, 185, 255),
+                  Colors.deepPurple,
+                  Colors.deepPurpleAccent,
                 ]),
           ),
           child: Column(
@@ -476,7 +456,6 @@ class Item4 extends StatelessWidget {
         elevation: 0,
         child: Container(
           decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(20),
             gradient: const LinearGradient(
                 begin: Alignment.topLeft,
                 end: Alignment.bottomRight,
@@ -485,8 +464,8 @@ class Item4 extends StatelessWidget {
                   1
                 ],
                 colors: [
-                  Color.fromARGB(255, 134, 214, 254),
-                  Color.fromARGB(255, 7, 185, 255),
+                  Colors.deepPurple,
+                  Colors.deepPurpleAccent,
                 ]),
           ),
           child: Column(
@@ -494,7 +473,7 @@ class Item4 extends StatelessWidget {
             children: <Widget>[
               const Text("IMT",
                   style: TextStyle(
-                      color: Colors.black,
+                      color: Colors.white,
                       fontSize: 20.0,
                       fontWeight: FontWeight.bold)),
               Container(
@@ -507,8 +486,7 @@ class Item4 extends StatelessWidget {
                       CircularProgressIndicator(
                         value: curatt,
                         backgroundColor: const Color.fromARGB(255, 0, 0, 0),
-                        valueColor: const AlwaysStoppedAnimation(
-                            Color.fromARGB(255, 255, 208, 0)),
+                        valueColor: const AlwaysStoppedAnimation(Colors.amber),
                         strokeWidth: 12,
                       ),
                       const SizedBox(
@@ -523,7 +501,7 @@ class Item4 extends StatelessWidget {
                             Text(
                               'Your current attendance: ${curatt * 100}',
                               style: const TextStyle(
-                                  color: Colors.black,
+                                  color: Colors.white,
                                   fontWeight: FontWeight.bold),
                             ),
                             SizedBox(
@@ -531,14 +509,14 @@ class Item4 extends StatelessWidget {
                             ),
                             Text(
                               'Total classes: ${curatt * 100}',
-                              style: const TextStyle(color: Colors.black),
+                              style: const TextStyle(color: Colors.white),
                             ),
                             SizedBox(
                               height: 10,
                             ),
                             Text(
                               'Classes attended: ${curatt * 100}',
-                              style: const TextStyle(color: Colors.black),
+                              style: const TextStyle(color: Colors.white),
                             )
                           ],
                         ),

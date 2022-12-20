@@ -3,6 +3,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:google_nav_bar/google_nav_bar.dart';
+import 'dart:io';
 
 class MainScreen1 extends StatefulWidget {
   const MainScreen1({super.key});
@@ -12,11 +13,13 @@ class MainScreen1 extends StatefulWidget {
 }
 
 class _MainScreenState extends State<MainScreen1> {
+  String valuechoose = '';
+  List listitem = ['pdf', 'sheet'];
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       bottomNavigationBar: GNav(
-          gap: 10,
+          gap: 5,
           backgroundColor: Colors.deepPurpleAccent,
           color: Colors.white,
           activeColor: Colors.amberAccent,
@@ -24,14 +27,29 @@ class _MainScreenState extends State<MainScreen1> {
             GButton(
               icon: Icons.home,
               text: 'Home',
+              onPressed: null,
             ),
             GButton(
-              icon: Icons.favorite_outline,
-              text: 'Favorites',
+              icon: Icons.notification_important,
+              text: 'Notifications',
+              onPressed: null,
+            ),
+            GButton(
+              icon: Icons.import_export,
+              text: 'Export table',
+              onPressed: () {
+                showAlertDialog(
+                    context,
+                    'Please select your export format and continue',
+                    "Export table",
+                    "Ok",
+                    "Cancel");
+              },
             ),
             GButton(
               icon: Icons.settings,
               text: 'Settings',
+              onPressed: null,
             ),
           ]),
       appBar: AppBar(
@@ -173,6 +191,83 @@ class _MainScreenState extends State<MainScreen1> {
           ],
         ),
       ),
+    );
+  }
+
+  showAlertDialog(BuildContext context, String message, String heading,
+      String buttonAcceptTitle, String buttonCancelTitle) {
+    // set up the buttons
+    Widget cancelButton = ElevatedButton(
+      child: Text(buttonCancelTitle),
+      onPressed: () {},
+    );
+    Widget continueButton = ElevatedButton(
+      child: Text(buttonAcceptTitle),
+      onPressed: () {},
+    );
+
+    // set up the AlertDialog
+    AlertDialog alert = AlertDialog(
+      title: Text(heading),
+      content: Text(message),
+      actions: [
+        DecoratedBox(
+            decoration: BoxDecoration(
+                color: Colors
+                    .deepPurpleAccent, //background color of dropdown button
+                border: Border.all(
+                    color: Colors.white, width: 3), //border of dropdown button
+                borderRadius: BorderRadius.circular(
+                    50), //border raiuds of dropdown button
+                boxShadow: const <BoxShadow>[
+                  //apply shadow on Dropdown button
+                  BoxShadow(
+                      color: Colors.black87, //shadow for button
+                      blurRadius: 5) //blur radius of shadow
+                ]),
+            child: Padding(
+                padding: EdgeInsets.only(left: 30, right: 30),
+                child: DropdownButton(
+                  value: "PDF",
+                  items: const [
+                    //add items in the dropdown
+                    DropdownMenuItem(
+                      child: Text("PDF"),
+                      value: "PDF",
+                    ),
+                    DropdownMenuItem(child: Text("SHEET"), value: "SHEET"),
+                  ],
+                  onChanged: (value) {
+                    //get value when changed
+                    print("You have selected $value");
+                  },
+                  icon: Padding(
+                      //Icon at tail, arrow bottom is default icon
+                      padding: EdgeInsets.only(left: 20),
+                      child: Icon(Icons.arrow_downward_outlined)),
+                  iconEnabledColor: Colors.white, //Icon color
+                  style: TextStyle(
+                      //te
+                      color: Colors.white, //Font color
+                      fontSize: 20 //font size on dropdown button
+                      ),
+
+                  dropdownColor:
+                      Colors.deepPurpleAccent, //dropdown background color
+                  underline: Container(), //remove underline
+                  isExpanded: true, //make true to make width 100%
+                ))),
+        cancelButton,
+        continueButton,
+      ],
+    );
+
+    // show the dialog
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return alert;
+      },
     );
   }
 }
