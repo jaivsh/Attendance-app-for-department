@@ -1,4 +1,5 @@
 import 'package:attendance_app/mainstuff.dart';
+import 'package:attendance_app/prof_alerts.dart';
 import 'package:attendance_app/register_screen.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/cupertino.dart';
@@ -6,6 +7,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:attendance_app/utilities/constants.dart';
 import 'package:flutter_swiper/flutter_swiper.dart';
+import 'package:getwidget/components/carousel/gf_carousel.dart';
+import 'package:google_nav_bar/google_nav_bar.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -15,6 +18,7 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
+  Color _favIconColor = Colors.deepPurpleAccent;
   int _currentIndex = 0;
   static double currentatt = 0.50;
 
@@ -32,86 +36,107 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      bottomNavigationBar: const GNav(
+          gap: 10,
+          backgroundColor: Colors.deepPurpleAccent,
+          color: Colors.white,
+          activeColor: Colors.amberAccent,
+          tabs: [
+            GButton(
+              icon: Icons.home,
+              text: 'Home',
+            ),
+            GButton(
+              icon: Icons.settings,
+              text: 'Settings',
+            ),
+          ]),
       extendBodyBehindAppBar: false,
       appBar: AppBar(
+        actions: [
+          IconButton(
+            onPressed: () {
+              setState(() {
+                if (_favIconColor == Colors.deepPurpleAccent) {
+                  _favIconColor = Colors.black;
+                } else {
+                  _favIconColor = Colors.deepPurpleAccent;
+                }
+              });
+            },
+            icon: Icon(
+              Icons.notifications_active,
+              color: _favIconColor,
+            ),
+            color: Colors.black,
+            tooltip: 'Show notifications',
+            highlightColor: Colors.black,
+          )
+        ],
         elevation: 0,
         backgroundColor: Colors.transparent,
-        leading: Padding(
-          padding: EdgeInsets.all(11.0),
-          child: ClipOval(
-            child: Image(
-              image: AssetImage('assets/images/waving_hand.png'),
+        title: Row(
+          children: const [
+            Text(
+              'Hi, Jaivardhan Shukla',
+              style: TextStyle(
+                  fontWeight: FontWeight.bold,
+                  color: Colors.black,
+                  fontSize: 20),
             ),
-          ),
+            //Image(
+            //image: AssetImage('assets/images/waving_hand.png'),
+            //),
+          ],
         ),
-        title: const Text(
-          'Hi, BT21MIN001',
-          style: TextStyle(fontWeight: FontWeight.bold, color: Colors.black),
-        ),
-        centerTitle: false,
+        centerTitle: true,
       ),
       body: Scaffold(
           body: Column(
         children: <Widget>[
-          CarouselSlider(
-            options: CarouselOptions(
-              height: 170.0,
-              autoPlay: true,
-              autoPlayInterval: const Duration(seconds: 10),
-              autoPlayAnimationDuration: const Duration(milliseconds: 800),
-              autoPlayCurve: Curves.fastOutSlowIn,
-              pauseAutoPlayOnTouch: true,
-              aspectRatio: 2.0,
-              onPageChanged: (index, reason) {
-                setState(() {
-                  _currentIndex = index;
-                });
-              },
-            ),
+          GFCarousel(
+            autoPlay: true,
+            hasPagination: true,
+            enlargeMainPage: true,
             items: cardList.map((card) {
               return Builder(builder: (BuildContext context) {
                 return Container(
-                  height: MediaQuery.of(context).size.height * 0.30,
-                  width: MediaQuery.of(context).size.width,
-                  child: Card(
-                    color: Colors.transparent,
-                    elevation: 0,
-                    child: card,
-                  ),
-                );
+                    height: MediaQuery.of(context).size.height * 0.30,
+                    width: MediaQuery.of(context).size.width,
+                    child: ClipRRect(
+                      borderRadius:
+                          const BorderRadius.all(Radius.circular(20.0)),
+                      child: Card(
+                        color: Colors.deepPurpleAccent,
+                        elevation: 10,
+                        child: card,
+                      ),
+                    ));
               });
             }).toList(),
+            onPageChanged: (index) {
+              setState(() {
+                index;
+              });
+            },
           ),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: map<Widget>(cardList, (index, url) {
-              return Container(
-                width: 10.0,
-                height: 10.0,
-                margin:
-                    const EdgeInsets.symmetric(vertical: 10.0, horizontal: 2.0),
-                decoration: BoxDecoration(
-                  shape: BoxShape.circle,
-                  color:
-                      _currentIndex == index ? Colors.blueAccent : Colors.grey,
-                ),
-              );
-            }),
+          const SizedBox(
+            height: 2,
           ),
           Container(
             padding: const EdgeInsets.only(top: 25, left: 15, right: 15),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               mainAxisAlignment: MainAxisAlignment.start,
-              children: [
-                const Text(
+              children: const [
+                Text(
                   'All Courses Enrolled',
                   style: TextStyle(fontWeight: FontWeight.bold),
                 ),
               ],
             ),
           ),
-          SizedBox(
+          const SizedBox(
             height: 30,
           ),
           Expanded(
@@ -178,9 +203,8 @@ class Item1 extends StatelessWidget {
     return Material(
         elevation: 0,
         child: Container(
-          decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(20),
-            gradient: const LinearGradient(
+          decoration: const BoxDecoration(
+            gradient: LinearGradient(
                 begin: Alignment.topLeft,
                 end: Alignment.bottomRight,
                 stops: [
@@ -188,8 +212,8 @@ class Item1 extends StatelessWidget {
                   1
                 ],
                 colors: [
-                  Color.fromARGB(255, 134, 214, 254),
-                  Color.fromARGB(255, 7, 185, 255),
+                  Colors.deepPurple,
+                  Colors.deepPurpleAccent,
                 ]),
           ),
           child: Column(
@@ -229,14 +253,14 @@ class Item1 extends StatelessWidget {
                                   color: Colors.black,
                                   fontWeight: FontWeight.bold),
                             ),
-                            SizedBox(
+                            const SizedBox(
                               height: 10,
                             ),
                             Text(
                               'Total classes: ${curatt * 100}',
                               style: const TextStyle(color: Colors.black),
                             ),
-                            SizedBox(
+                            const SizedBox(
                               height: 10,
                             ),
                             Text(
@@ -264,7 +288,6 @@ class Item2 extends StatelessWidget {
         elevation: 0,
         child: Container(
           decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(20),
             gradient: const LinearGradient(
                 begin: Alignment.topLeft,
                 end: Alignment.bottomRight,
@@ -273,8 +296,8 @@ class Item2 extends StatelessWidget {
                   1
                 ],
                 colors: [
-                  Color.fromARGB(255, 134, 214, 254),
-                  Color.fromARGB(255, 7, 185, 255),
+                  Colors.deepPurple,
+                  Colors.deepPurpleAccent,
                 ]),
           ),
           child: Column(
@@ -348,9 +371,8 @@ class Item3 extends StatelessWidget {
     return Material(
         elevation: 0,
         child: Container(
-          decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(20),
-            gradient: const LinearGradient(
+          decoration: const BoxDecoration(
+            gradient: LinearGradient(
                 begin: Alignment.topLeft,
                 end: Alignment.bottomRight,
                 stops: [
@@ -358,8 +380,8 @@ class Item3 extends StatelessWidget {
                   1
                 ],
                 colors: [
-                  Color.fromARGB(255, 134, 214, 254),
-                  Color.fromARGB(255, 7, 185, 255),
+                  Colors.deepPurple,
+                  Colors.deepPurpleAccent,
                 ]),
           ),
           child: Column(
@@ -367,7 +389,7 @@ class Item3 extends StatelessWidget {
             children: <Widget>[
               const Text("Underground Metalliferous Mining",
                   style: TextStyle(
-                      color: Colors.black,
+                      color: Color.fromRGBO(0, 0, 0, 1),
                       fontSize: 20.0,
                       fontWeight: FontWeight.bold)),
               Container(
@@ -377,10 +399,10 @@ class Item3 extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.center,
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
-                      CircularProgressIndicator(
+                      const CircularProgressIndicator(
                         value: 0.4,
-                        backgroundColor: const Color.fromARGB(255, 0, 0, 0),
-                        valueColor: const AlwaysStoppedAnimation(
+                        backgroundColor: Color.fromARGB(255, 0, 0, 0),
+                        valueColor: AlwaysStoppedAnimation(
                             Color.fromARGB(255, 255, 208, 0)),
                         strokeWidth: 12,
                       ),
@@ -434,7 +456,6 @@ class Item4 extends StatelessWidget {
         elevation: 0,
         child: Container(
           decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(20),
             gradient: const LinearGradient(
                 begin: Alignment.topLeft,
                 end: Alignment.bottomRight,
@@ -443,8 +464,8 @@ class Item4 extends StatelessWidget {
                   1
                 ],
                 colors: [
-                  Color.fromARGB(255, 134, 214, 254),
-                  Color.fromARGB(255, 7, 185, 255),
+                  Colors.deepPurple,
+                  Colors.deepPurpleAccent,
                 ]),
           ),
           child: Column(
@@ -452,7 +473,7 @@ class Item4 extends StatelessWidget {
             children: <Widget>[
               const Text("IMT",
                   style: TextStyle(
-                      color: Colors.black,
+                      color: Colors.white,
                       fontSize: 20.0,
                       fontWeight: FontWeight.bold)),
               Container(
@@ -465,8 +486,7 @@ class Item4 extends StatelessWidget {
                       CircularProgressIndicator(
                         value: curatt,
                         backgroundColor: const Color.fromARGB(255, 0, 0, 0),
-                        valueColor: const AlwaysStoppedAnimation(
-                            Color.fromARGB(255, 255, 208, 0)),
+                        valueColor: const AlwaysStoppedAnimation(Colors.amber),
                         strokeWidth: 12,
                       ),
                       const SizedBox(
@@ -481,7 +501,7 @@ class Item4 extends StatelessWidget {
                             Text(
                               'Your current attendance: ${curatt * 100}',
                               style: const TextStyle(
-                                  color: Colors.black,
+                                  color: Colors.white,
                                   fontWeight: FontWeight.bold),
                             ),
                             SizedBox(
@@ -489,14 +509,14 @@ class Item4 extends StatelessWidget {
                             ),
                             Text(
                               'Total classes: ${curatt * 100}',
-                              style: const TextStyle(color: Colors.black),
+                              style: const TextStyle(color: Colors.white),
                             ),
                             SizedBox(
                               height: 10,
                             ),
                             Text(
                               'Classes attended: ${curatt * 100}',
-                              style: const TextStyle(color: Colors.black),
+                              style: const TextStyle(color: Colors.white),
                             )
                           ],
                         ),

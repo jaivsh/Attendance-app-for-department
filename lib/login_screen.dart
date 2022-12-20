@@ -1,3 +1,4 @@
+import 'package:attendance_app/forgotpassword.dart';
 import 'package:attendance_app/home_screen.dart';
 import 'package:attendance_app/register_screen.dart';
 import 'package:flutter/material.dart';
@@ -86,7 +87,12 @@ class _LoginScreenState extends State<LoginScreen> {
     return Container(
       alignment: Alignment.centerRight,
       child: TextButton(
-        onPressed: () {},
+        onPressed: () {
+          Navigator.push(
+            context,
+            MaterialPageRoute(builder: (context) => ForgotPassword()),
+          );
+        },
         child: Text(
           'Forgot Password?',
           style: kLabelStyle,
