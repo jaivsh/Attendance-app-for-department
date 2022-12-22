@@ -9,6 +9,7 @@ import 'package:attendance_app/utilities/constants.dart';
 import 'package:flutter_swiper/flutter_swiper.dart';
 import 'package:getwidget/components/carousel/gf_carousel.dart';
 import 'package:google_nav_bar/google_nav_bar.dart';
+import 'package:badges/badges.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -32,7 +33,7 @@ class _HomeScreenState extends State<HomeScreen> {
     return result;
   }
 
-  int _index = 0;
+  int academicnotofications = 0;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -54,21 +55,29 @@ class _HomeScreenState extends State<HomeScreen> {
       extendBodyBehindAppBar: false,
       appBar: AppBar(
         actions: [
-          IconButton(
-            onPressed: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(builder: (context) => ProfAlert()),
-              );
-            },
-            icon: Icon(
-              Icons.notifications_active,
-              color: _favIconColor,
-            ),
-            color: Colors.black,
-            tooltip: 'Show notifications',
-            highlightColor: Colors.black,
-          )
+          Badge(
+              elevation: 10,
+              badgeColor: Colors.orangeAccent,
+              padding: const EdgeInsets.all(10),
+              badgeContent: (academicnotofications != 0)
+                  ? Text('$academicnotofications')
+                  : null,
+              position: BadgePosition.topStart(),
+              child: IconButton(
+                onPressed: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => ProfAlert()),
+                  );
+                },
+                icon: Icon(
+                  Icons.notifications_active,
+                  color: _favIconColor,
+                ),
+                color: Colors.black,
+                tooltip: 'Show notifications',
+                highlightColor: Colors.black,
+              ))
         ],
         elevation: 0,
         backgroundColor: Colors.transparent,
@@ -209,7 +218,7 @@ class Item1 extends StatelessWidget {
                   1
                 ],
                 colors: [
-                  Colors.deepPurple,
+                  Colors.deepPurpleAccent,
                   Colors.deepPurpleAccent,
                 ]),
           ),
@@ -293,7 +302,7 @@ class Item2 extends StatelessWidget {
                   1
                 ],
                 colors: [
-                  Colors.deepPurple,
+                  Colors.deepPurpleAccent,
                   Colors.deepPurpleAccent,
                 ]),
           ),
@@ -377,7 +386,7 @@ class Item3 extends StatelessWidget {
                   1
                 ],
                 colors: [
-                  Colors.deepPurple,
+                  Colors.deepPurpleAccent,
                   Colors.deepPurpleAccent,
                 ]),
           ),
@@ -411,7 +420,7 @@ class Item3 extends StatelessWidget {
                           mainAxisAlignment: MainAxisAlignment.center,
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            Text(
+                            const Text(
                               'Your current attendance: ${0.4 * 100}%',
                               style: const TextStyle(
                                   color: Colors.amber,
@@ -460,7 +469,7 @@ class Item4 extends StatelessWidget {
                   1
                 ],
                 colors: [
-                  Colors.deepPurple,
+                  Colors.deepPurpleAccent,
                   Colors.deepPurpleAccent,
                 ]),
           ),
