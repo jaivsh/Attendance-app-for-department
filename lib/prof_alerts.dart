@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/services.dart';
 import 'package:google_nav_bar/google_nav_bar.dart';
+import 'profalert_view.dart';
 
 class ProfAlert extends StatefulWidget {
   const ProfAlert({super.key});
@@ -58,11 +59,14 @@ Widget _notificationsList(
 }
 
 class _ProfAlertState extends State<ProfAlert> {
+  int counter = 12;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       extendBodyBehindAppBar: false,
       appBar: AppBar(
+        centerTitle: true,
+        elevation: 6,
         title: const Text(
           'Academic Alerts',
           style: TextStyle(fontWeight: FontWeight.bold),
@@ -71,7 +75,39 @@ class _ProfAlertState extends State<ProfAlert> {
       ),
       body: Container(
         padding: const EdgeInsets.all(15),
-        child: Column(children: []),
+        child: Column(children: [
+          Expanded(
+            child: ListView.builder(
+                itemCount: counter,
+                itemBuilder: (BuildContext context, int index) {
+                  return InkWell(
+                      onTap: () {
+                        //Navigator.push(
+                        // context,
+                        //MaterialPageRoute(
+                        //   builder: (context) => MainScreen1()),
+                        //);
+                      },
+                      child: Material(
+                          elevation: 300,
+                          child: ListTile(
+                              contentPadding: const EdgeInsets.only(
+                                  left: 5, right: 5, bottom: 10),
+                              leading: const Icon(CupertinoIcons.book),
+                              tileColor: Colors.white24,
+                              shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(15.0),
+                                  side: const BorderSide(color: Colors.white)),
+                              trailing: const Text(
+                                "GFG",
+                                style: TextStyle(
+                                    color: Color.fromARGB(255, 0, 132, 255),
+                                    fontSize: 15),
+                              ),
+                              title: Text('Astrazeneca'))));
+                }),
+          )
+        ]),
       ),
     );
   }

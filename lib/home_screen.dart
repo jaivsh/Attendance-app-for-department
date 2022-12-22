@@ -33,7 +33,8 @@ class _HomeScreenState extends State<HomeScreen> {
     return result;
   }
 
-  int academicnotofications = 0;
+  String username = "Jaivardhan Shukla";
+  int academicnotofications = 10;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -56,12 +57,14 @@ class _HomeScreenState extends State<HomeScreen> {
       appBar: AppBar(
         actions: [
           Badge(
-              elevation: 10,
+              elevation: 0,
+              showBadge: academicnotofications == 0 ? false : true,
+              animationType: BadgeAnimationType.fade,
+              shape: BadgeShape.circle,
+              animationDuration: const Duration(seconds: 1),
               badgeColor: Colors.orangeAccent,
               padding: const EdgeInsets.all(10),
-              badgeContent: (academicnotofications != 0)
-                  ? Text('$academicnotofications')
-                  : null,
+              badgeContent: Text('$academicnotofications'),
               position: BadgePosition.topStart(),
               child: IconButton(
                 onPressed: () {
@@ -81,21 +84,12 @@ class _HomeScreenState extends State<HomeScreen> {
         ],
         elevation: 0,
         backgroundColor: Colors.transparent,
-        title: Row(
-          children: const [
-            Text(
-              'Hi, Jaivardhan Shukla',
-              style: TextStyle(
-                  fontWeight: FontWeight.bold,
-                  color: Colors.black,
-                  fontSize: 20),
-            ),
-            //Image(
-            //image: AssetImage('assets/images/waving_hand.png'),
-            //),
-          ],
+        title: Text(
+          'Hi, $username',
+          style: const TextStyle(
+              fontWeight: FontWeight.bold, color: Colors.black, fontSize: 20),
         ),
-        centerTitle: true,
+        centerTitle: false,
       ),
       body: Scaffold(
           body: Column(
