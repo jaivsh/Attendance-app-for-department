@@ -56,13 +56,10 @@ class _HomeScreenState extends State<HomeScreen> {
         actions: [
           IconButton(
             onPressed: () {
-              setState(() {
-                if (_favIconColor == Colors.deepPurpleAccent) {
-                  _favIconColor = Colors.black;
-                } else {
-                  _favIconColor = Colors.deepPurpleAccent;
-                }
-              });
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => ProfAlert()),
+              );
             },
             icon: Icon(
               Icons.notifications_active,
@@ -389,7 +386,7 @@ class Item3 extends StatelessWidget {
             children: <Widget>[
               const Text("Underground Metalliferous Mining",
                   style: TextStyle(
-                      color: Color.fromRGBO(0, 0, 0, 1),
+                      color: Colors.amber,
                       fontSize: 20.0,
                       fontWeight: FontWeight.bold)),
               Container(
@@ -402,8 +399,7 @@ class Item3 extends StatelessWidget {
                       const CircularProgressIndicator(
                         value: 0.4,
                         backgroundColor: Color.fromARGB(255, 0, 0, 0),
-                        valueColor: AlwaysStoppedAnimation(
-                            Color.fromARGB(255, 255, 208, 0)),
+                        valueColor: AlwaysStoppedAnimation(Colors.amberAccent),
                         strokeWidth: 12,
                       ),
                       const SizedBox(
@@ -418,7 +414,7 @@ class Item3 extends StatelessWidget {
                             Text(
                               'Your current attendance: ${0.4 * 100}%',
                               style: const TextStyle(
-                                  color: Colors.black,
+                                  color: Colors.amber,
                                   fontWeight: FontWeight.bold),
                             ),
                             SizedBox(
@@ -426,14 +422,14 @@ class Item3 extends StatelessWidget {
                             ),
                             Text(
                               'Total classes: ${curatt * 100}',
-                              style: const TextStyle(color: Colors.black),
+                              style: const TextStyle(color: Colors.amber),
                             ),
                             SizedBox(
                               height: 10,
                             ),
                             Text(
                               'Classes attended: ${curatt * 100}',
-                              style: const TextStyle(color: Colors.black),
+                              style: const TextStyle(color: Colors.amber),
                             )
                           ],
                         ),
@@ -504,14 +500,14 @@ class Item4 extends StatelessWidget {
                                   color: Colors.white,
                                   fontWeight: FontWeight.bold),
                             ),
-                            SizedBox(
+                            const SizedBox(
                               height: 10,
                             ),
                             Text(
                               'Total classes: ${curatt * 100}',
                               style: const TextStyle(color: Colors.white),
                             ),
-                            SizedBox(
+                            const SizedBox(
                               height: 10,
                             ),
                             Text(

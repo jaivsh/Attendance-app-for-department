@@ -241,7 +241,7 @@ class _RegScreenState extends State<RegScreen> {
   Widget _buildSignInWithText() {
     return Column(
       children: <Widget>[
-        Text(
+        const Text(
           '- OR -',
           style: TextStyle(
             color: Colors.white,
