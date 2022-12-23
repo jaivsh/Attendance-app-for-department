@@ -5,6 +5,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:splashscreen/splashscreen.dart';
+import 'package:flutter/services.dart';
 
 void main() async {
   runApp(const MyApp());
@@ -34,12 +35,10 @@ class mainstuff extends StatefulWidget {
 }
 
 class _mainstuffState extends State<mainstuff> {
-  
-
   List userslist = [];
-  
+
   void getlogindata() async {
-      await FirebaseFirestore.instance
+    await FirebaseFirestore.instance
         .collection('student-side')
         .get()
         .then((querySnapshot) {

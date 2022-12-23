@@ -1,4 +1,7 @@
+import 'package:attendance_app/home_screen.dart';
 import 'package:attendance_app/login_screen.dart';
+import 'package:attendance_app/prof_alerts.dart';
+import 'package:attendance_app/settings.dart' as setting;
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -73,15 +76,49 @@ class _MainScreenState extends State<MainScreen1> {
           color: Colors.white,
           activeColor: Colors.amberAccent,
           tabs: [
-            const GButton(
+            GButton(
               icon: Icons.home,
               text: 'Home',
-              onPressed: null,
+              onPressed: () {
+                Navigator.of(context).push(new PageRouteBuilder(
+                    opaque: true,
+                    transitionDuration: const Duration(),
+                    pageBuilder: (BuildContext context, _, __) {
+                      return new HomeScreen();
+                    },
+                    transitionsBuilder:
+                        (_, Animation<double> animation, __, Widget child) {
+                      return new SlideTransition(
+                        position: new Tween<Offset>(
+                          begin: const Offset(0, 100),
+                          end: Offset.zero,
+                        ).animate(animation),
+                        child: child,
+                      );
+                    }));
+              },
             ),
-            const GButton(
+            GButton(
               icon: Icons.notification_important,
               text: 'Notifications',
-              onPressed: null,
+              onPressed: () {
+                Navigator.of(context).push(new PageRouteBuilder(
+                    opaque: true,
+                    transitionDuration: const Duration(),
+                    pageBuilder: (BuildContext context, _, __) {
+                      return new ProfAlert();
+                    },
+                    transitionsBuilder:
+                        (_, Animation<double> animation, __, Widget child) {
+                      return new SlideTransition(
+                        position: new Tween<Offset>(
+                          begin: const Offset(0, 100),
+                          end: Offset.zero,
+                        ).animate(animation),
+                        child: child,
+                      );
+                    }));
+              },
             ),
             GButton(
               icon: Icons.import_export,
@@ -95,10 +132,27 @@ class _MainScreenState extends State<MainScreen1> {
                     "Cancel");
               },
             ),
-            const GButton(
+            GButton(
               icon: Icons.settings,
               text: 'Settings',
-              onPressed: null,
+              onPressed: () {
+                Navigator.of(context).push(PageRouteBuilder(
+                    opaque: true,
+                    transitionDuration: const Duration(),
+                    pageBuilder: (BuildContext context, _, __) {
+                      return setting.Settings();
+                    },
+                    transitionsBuilder:
+                        (_, Animation<double> animation, __, Widget child) {
+                      return SlideTransition(
+                        position: Tween<Offset>(
+                          begin: const Offset(0, 100),
+                          end: Offset.zero,
+                        ).animate(animation),
+                        child: child,
+                      );
+                    }));
+              },
             ),
           ]),
       appBar: AppBar(

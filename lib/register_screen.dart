@@ -1,3 +1,4 @@
+import 'package:attendance_app/enterloginotp.dart';
 import 'package:attendance_app/login_screen.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
@@ -21,7 +22,7 @@ class _RegScreenState extends State<RegScreen> {
           'Enter Enrollment',
           style: kLabelStyle,
         ),
-        SizedBox(height: 10.0),
+        const SizedBox(height: 10.0),
         Container(
           alignment: Alignment.centerLeft,
           decoration: kBoxDecorationStyle,
@@ -31,14 +32,14 @@ class _RegScreenState extends State<RegScreen> {
               tobesent[0] = value;
             },
             keyboardType: TextInputType.text,
-            style: TextStyle(
+            style: const TextStyle(
               color: Colors.white,
               fontFamily: 'OpenSans',
             ),
             decoration: InputDecoration(
               border: InputBorder.none,
-              contentPadding: EdgeInsets.only(top: 14.0),
-              prefixIcon: Icon(
+              contentPadding: const EdgeInsets.only(top: 14.0),
+              prefixIcon: const Icon(
                 Icons.person,
                 color: Colors.white,
               ),
@@ -59,7 +60,7 @@ class _RegScreenState extends State<RegScreen> {
           'Create a Password',
           style: kLabelStyle,
         ),
-        SizedBox(height: 10.0),
+        const SizedBox(height: 10.0),
         Container(
           alignment: Alignment.centerLeft,
           decoration: kBoxDecorationStyle,
@@ -135,7 +136,7 @@ class _RegScreenState extends State<RegScreen> {
           'Enter Date of Birth',
           style: kLabelStyle,
         ),
-        SizedBox(height: 10.0),
+        const SizedBox(height: 10.0),
         Container(
           alignment: Alignment.centerLeft,
           decoration: kBoxDecorationStyle,
@@ -145,14 +146,14 @@ class _RegScreenState extends State<RegScreen> {
               tobesent[3] = value;
             },
             keyboardType: TextInputType.datetime,
-            style: TextStyle(
+            style: const TextStyle(
               color: Colors.white,
               fontFamily: 'OpenSans',
             ),
             decoration: InputDecoration(
               border: InputBorder.none,
-              contentPadding: EdgeInsets.only(top: 14.0),
-              prefixIcon: Icon(
+              contentPadding: const EdgeInsets.only(top: 14.0),
+              prefixIcon: const Icon(
                 Icons.person,
                 color: Colors.white,
               ),
@@ -212,14 +213,14 @@ class _RegScreenState extends State<RegScreen> {
 
   Widget _buildLoginBtn() {
     return Container(
-      padding: EdgeInsets.symmetric(vertical: 25.0),
+      padding: const EdgeInsets.symmetric(vertical: 25.0),
       width: double.infinity,
       child: ElevatedButton(
         onPressed: () {
           print(tobesent);
         },
         style: ElevatedButton.styleFrom(
-            padding: EdgeInsets.all(15.0),
+            padding: const EdgeInsets.all(15.0),
             shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(30.0),
             ),
@@ -248,7 +249,7 @@ class _RegScreenState extends State<RegScreen> {
             fontWeight: FontWeight.w400,
           ),
         ),
-        SizedBox(height: 20.0),
+        const SizedBox(height: 20.0),
         TextButton(
           onPressed: () {
             Navigator.pushReplacement(
@@ -275,7 +276,7 @@ class _RegScreenState extends State<RegScreen> {
           shape: BoxShape.circle,
           color: Colors.white,
           boxShadow: [
-            BoxShadow(
+            const BoxShadow(
               color: Colors.black26,
               offset: Offset(0, 2),
               blurRadius: 6.0,
@@ -292,9 +293,9 @@ class _RegScreenState extends State<RegScreen> {
   Widget _buildSignupBtn() {
     return GestureDetector(
       onTap: () {
-        Navigator.pushReplacement(
+        Navigator.push(
           context,
-          MaterialPageRoute(builder: (context) => RegScreen()),
+          MaterialPageRoute(builder: (context) => const LoginOtp()),
         );
       },
       child: RichText(
@@ -323,6 +324,14 @@ class _RegScreenState extends State<RegScreen> {
   }
 
   @override
+  void initState() {
+    SystemChrome.setSystemUIOverlayStyle(const SystemUiOverlayStyle(
+      statusBarColor: Colors.transparent,
+    ));
+    super.initState();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: AnnotatedRegion<SystemUiOverlayStyle>(
@@ -334,7 +343,7 @@ class _RegScreenState extends State<RegScreen> {
               Container(
                 height: double.infinity,
                 width: double.infinity,
-                decoration: BoxDecoration(
+                decoration: const BoxDecoration(
                   gradient: LinearGradient(
                     begin: Alignment.topCenter,
                     end: Alignment.bottomCenter,
@@ -348,11 +357,11 @@ class _RegScreenState extends State<RegScreen> {
                   ),
                 ),
               ),
-              Container(
+              SizedBox(
                 height: double.infinity,
                 child: SingleChildScrollView(
                   physics: const AlwaysScrollableScrollPhysics(),
-                  padding: EdgeInsets.symmetric(
+                  padding: const EdgeInsets.symmetric(
                     horizontal: 40.0,
                     vertical: 40.0,
                   ),
@@ -375,17 +384,17 @@ class _RegScreenState extends State<RegScreen> {
                           fontWeight: FontWeight.bold,
                         ),
                       ),
-                      SizedBox(height: 30.0),
+                      const SizedBox(height: 30.0),
                       _buildEmailTF(),
-                      SizedBox(
+                      const SizedBox(
                         height: 30.0,
                       ),
                       _buildPasswordTF(),
-                      SizedBox(
+                      const SizedBox(
                         height: 30.0,
                       ),
                       _buildNameTF(),
-                      SizedBox(
+                      const SizedBox(
                         height: 30.0,
                       ),
                       _buildDOBTF(),

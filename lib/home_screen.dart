@@ -1,6 +1,7 @@
 import 'package:attendance_app/mainstuff.dart';
 import 'package:attendance_app/prof_alerts.dart';
 import 'package:attendance_app/register_screen.dart';
+import 'package:attendance_app/settings.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -38,7 +39,7 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      bottomNavigationBar: const GNav(
+      bottomNavigationBar: GNav(
           gap: 10,
           backgroundColor: Colors.deepPurpleAccent,
           color: Colors.white,
@@ -47,10 +48,46 @@ class _HomeScreenState extends State<HomeScreen> {
             GButton(
               icon: Icons.home,
               text: 'Home',
+              onPressed: () {
+                Navigator.of(context).push(new PageRouteBuilder(
+                    opaque: true,
+                    transitionDuration: const Duration(),
+                    pageBuilder: (BuildContext context, _, __) {
+                      return new HomeScreen();
+                    },
+                    transitionsBuilder:
+                        (_, Animation<double> animation, __, Widget child) {
+                      return new SlideTransition(
+                        position: new Tween<Offset>(
+                          begin: const Offset(0, 100),
+                          end: Offset.zero,
+                        ).animate(animation),
+                        child: child,
+                      );
+                    }));
+              },
             ),
             GButton(
               icon: Icons.settings,
               text: 'Settings',
+              onPressed: () {
+                Navigator.of(context).push(new PageRouteBuilder(
+                    opaque: true,
+                    transitionDuration: const Duration(),
+                    pageBuilder: (BuildContext context, _, __) {
+                      return new Settings();
+                    },
+                    transitionsBuilder:
+                        (_, Animation<double> animation, __, Widget child) {
+                      return new SlideTransition(
+                        position: new Tween<Offset>(
+                          begin: const Offset(0, 100),
+                          end: Offset.zero,
+                        ).animate(animation),
+                        child: child,
+                      );
+                    }));
+              },
             ),
           ]),
       extendBodyBehindAppBar: false,
@@ -70,7 +107,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 onPressed: () {
                   Navigator.push(
                     context,
-                    MaterialPageRoute(builder: (context) => ProfAlert()),
+                    MaterialPageRoute(builder: (context) => const ProfAlert()),
                   );
                 },
                 icon: Icon(
@@ -148,7 +185,7 @@ class _HomeScreenState extends State<HomeScreen> {
                         Navigator.push(
                           context,
                           MaterialPageRoute(
-                              builder: (context) => MainScreen1()),
+                              builder: (context) => const MainScreen1()),
                         );
                       },
                       child: Material(
@@ -180,17 +217,17 @@ class _HomeScreenState extends State<HomeScreen> {
 
 Widget titleofcourses(int index) {
   if (index == 0) {
-    return Text('IMT (DC)');
+    return const Text('IMT (DC)');
   } else if (index == 1) {
-    return Text('UMM (DC)');
+    return const Text('UMM (DC)');
   } else if (index == 2) {
-    return Text('UCM (DC)');
+    return const Text('UCM (DC)');
   } else if (index == 3) {
-    return Text('Statistics (DC)');
+    return const Text('Statistics (DC)');
   } else if (index == 4) {
-    return Text('Electronics in mine (DC)');
+    return const Text('Electronics in mine (DC)');
   } else {
-    return Text('Data Structures (OC)');
+    return const Text('Data Structures (OC)');
   }
 }
 
@@ -242,7 +279,7 @@ class Item1 extends StatelessWidget {
                         height: 70,
                       ),
                       Container(
-                        padding: EdgeInsets.only(left: 30),
+                        padding: const EdgeInsets.only(left: 30),
                         child: Column(
                           mainAxisAlignment: MainAxisAlignment.center,
                           crossAxisAlignment: CrossAxisAlignment.start,
@@ -287,8 +324,8 @@ class Item2 extends StatelessWidget {
     return Material(
         elevation: 0,
         child: Container(
-          decoration: BoxDecoration(
-            gradient: const LinearGradient(
+          decoration: const BoxDecoration(
+            gradient: LinearGradient(
                 begin: Alignment.topLeft,
                 end: Alignment.bottomRight,
                 stops: [
@@ -326,7 +363,7 @@ class Item2 extends StatelessWidget {
                         height: 70,
                       ),
                       Container(
-                        padding: EdgeInsets.only(left: 30),
+                        padding: const EdgeInsets.only(left: 30),
                         child: Column(
                           mainAxisAlignment: MainAxisAlignment.center,
                           crossAxisAlignment: CrossAxisAlignment.start,
@@ -337,14 +374,14 @@ class Item2 extends StatelessWidget {
                                   color: Colors.black,
                                   fontWeight: FontWeight.bold),
                             ),
-                            SizedBox(
+                            const SizedBox(
                               height: 10,
                             ),
                             Text(
                               'Total classes: ${curatt * 100}',
                               style: const TextStyle(color: Colors.black),
                             ),
-                            SizedBox(
+                            const SizedBox(
                               height: 10,
                             ),
                             Text(
@@ -409,7 +446,7 @@ class Item3 extends StatelessWidget {
                         height: 70,
                       ),
                       Container(
-                        padding: EdgeInsets.only(left: 30),
+                        padding: const EdgeInsets.only(left: 30),
                         child: Column(
                           mainAxisAlignment: MainAxisAlignment.center,
                           crossAxisAlignment: CrossAxisAlignment.start,
@@ -420,14 +457,14 @@ class Item3 extends StatelessWidget {
                                   color: Colors.amber,
                                   fontWeight: FontWeight.bold),
                             ),
-                            SizedBox(
+                            const SizedBox(
                               height: 10,
                             ),
                             Text(
                               'Total classes: ${curatt * 100}',
                               style: const TextStyle(color: Colors.amber),
                             ),
-                            SizedBox(
+                            const SizedBox(
                               height: 10,
                             ),
                             Text(
@@ -454,8 +491,8 @@ class Item4 extends StatelessWidget {
     return Material(
         elevation: 0,
         child: Container(
-          decoration: BoxDecoration(
-            gradient: const LinearGradient(
+          decoration: const BoxDecoration(
+            gradient: LinearGradient(
                 begin: Alignment.topLeft,
                 end: Alignment.bottomRight,
                 stops: [
@@ -492,7 +529,7 @@ class Item4 extends StatelessWidget {
                         height: 70,
                       ),
                       Container(
-                        padding: EdgeInsets.only(left: 30),
+                        padding: const EdgeInsets.only(left: 30),
                         child: Column(
                           mainAxisAlignment: MainAxisAlignment.center,
                           crossAxisAlignment: CrossAxisAlignment.start,

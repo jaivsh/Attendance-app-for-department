@@ -1,3 +1,4 @@
+import 'package:attendance_app/home_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/services.dart';
@@ -8,31 +9,6 @@ class Settings extends StatefulWidget {
 
   @override
   State<Settings> createState() => _SettingsState();
-}
-
-Widget _myListView(BuildContext context) {
-  return ListView(
-    children: <Widget>[
-      ListTile(
-        leading: CircleAvatar(
-          backgroundImage: AssetImage('assets/sun.jpg'),
-        ),
-        title: Text('Sun'),
-      ),
-      ListTile(
-        leading: CircleAvatar(
-          backgroundImage: AssetImage('assets/moon.jpg'),
-        ),
-        title: Text('Moon'),
-      ),
-      ListTile(
-        leading: CircleAvatar(
-          backgroundImage: AssetImage('assets/stars.jpg'),
-        ),
-        title: Text('Star'),
-      ),
-    ],
-  );
 }
 
 Widget _notificationsList(
@@ -61,23 +37,41 @@ class _SettingsState extends State<Settings> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      bottomNavigationBar: const GNav(
+      bottomNavigationBar: GNav(
           gap: 10,
           backgroundColor: Colors.deepPurpleAccent,
           color: Colors.white,
           activeColor: Colors.amberAccent,
           tabs: [
             GButton(
-              icon: Icons.home,
-              text: 'Home',
-            ),
-            GButton(
               icon: Icons.settings,
               text: 'Settings',
+              onPressed: () {
+                Navigator.of(context).push(new PageRouteBuilder(
+                  opaque: true,
+                  transitionDuration: const Duration(),
+                  pageBuilder: (BuildContext context, _, __) {
+                    return new Settings();
+                  },
+                ));
+              },
             ),
+            GButton(
+                icon: Icons.home,
+                text: 'Home',
+                onPressed: () {
+                  Navigator.of(context).push(new PageRouteBuilder(
+                    opaque: true,
+                    transitionDuration: const Duration(),
+                    pageBuilder: (BuildContext context, _, __) {
+                      return const HomeScreen();
+                    },
+                  ));
+                })
           ]),
       extendBodyBehindAppBar: false,
       appBar: AppBar(
+        backgroundColor: Colors.deepPurpleAccent,
         title: const Text(
           'Settings',
           style: TextStyle(fontWeight: FontWeight.bold),
@@ -85,7 +79,19 @@ class _SettingsState extends State<Settings> {
       ),
       body: Container(
         padding: const EdgeInsets.all(15),
-        child: Column(children: []),
+        child: Column(children: [
+          ButtonTheme(
+              height: 100,
+              minWidth: MediaQuery.of(context).size.width,
+              child: ElevatedButton(
+                  onPressed: null,
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: Colors.redAccent,
+                  ),
+                  child: const Text(
+                    'LOGOUT',
+                  )))
+        ]),
       ),
     );
   }
