@@ -130,7 +130,7 @@ class _LoginScreenState extends State<LoginScreen> {
 
   Widget _buildLoginBtn() {
     return Container(
-      padding: EdgeInsets.symmetric(vertical: 25.0),
+      padding: const EdgeInsets.symmetric(vertical: 25.0),
       width: double.infinity,
       child: ElevatedButton(
         onPressed: () {
@@ -236,13 +236,6 @@ class _LoginScreenState extends State<LoginScreen> {
   }
 
   @override
-  void initState() {
-    SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
-      statusBarColor: Colors.transparent,
-    ));
-    super.initState();
-  }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -286,7 +279,7 @@ class _LoginScreenState extends State<LoginScreen> {
                         height: 200,
                         width: 200,
                       ),
-                      Text(
+                      const Text(
                         'Authenticate',
                         style: TextStyle(
                           color: Colors.white,

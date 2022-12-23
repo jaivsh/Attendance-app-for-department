@@ -47,11 +47,11 @@ class _SettingsState extends State<Settings> {
               icon: Icons.settings,
               text: 'Settings',
               onPressed: () {
-                Navigator.of(context).push(new PageRouteBuilder(
+                Navigator.of(context).push(PageRouteBuilder(
                   opaque: true,
                   transitionDuration: const Duration(),
                   pageBuilder: (BuildContext context, _, __) {
-                    return new Settings();
+                    return Settings();
                   },
                 ));
               },
@@ -60,7 +60,7 @@ class _SettingsState extends State<Settings> {
                 icon: Icons.home,
                 text: 'Home',
                 onPressed: () {
-                  Navigator.of(context).push(new PageRouteBuilder(
+                  Navigator.of(context).push(PageRouteBuilder(
                     opaque: true,
                     transitionDuration: const Duration(),
                     pageBuilder: (BuildContext context, _, __) {
@@ -80,17 +80,24 @@ class _SettingsState extends State<Settings> {
       body: Container(
         padding: const EdgeInsets.all(15),
         child: Column(children: [
-          ButtonTheme(
-              height: 100,
-              minWidth: MediaQuery.of(context).size.width,
-              child: ElevatedButton(
-                  onPressed: null,
-                  style: ElevatedButton.styleFrom(
-                    backgroundColor: Colors.redAccent,
-                  ),
+          SizedBox(
+            width: MediaQuery.of(context).size.width,
+            height: 50,
+            child: Card(
+              elevation: 10,
+              child: Expanded(
+                flex: 0,
+                child: ElevatedButton(
+                  style: ElevatedButton.styleFrom(backgroundColor: Colors.red),
                   child: const Text(
                     'LOGOUT',
-                  )))
+                    style: TextStyle(fontSize: 17),
+                  ),
+                  onPressed: () => {},
+                ),
+              ),
+            ),
+          ),
         ]),
       ),
     );

@@ -80,7 +80,7 @@ class _MainScreenState extends State<MainScreen1> {
               icon: Icons.home,
               text: 'Home',
               onPressed: () {
-                Navigator.of(context).push(new PageRouteBuilder(
+                Navigator.of(context).push(PageRouteBuilder(
                     opaque: true,
                     transitionDuration: const Duration(),
                     pageBuilder: (BuildContext context, _, __) {
@@ -102,7 +102,7 @@ class _MainScreenState extends State<MainScreen1> {
               icon: Icons.notification_important,
               text: 'Notifications',
               onPressed: () {
-                Navigator.of(context).push(new PageRouteBuilder(
+                Navigator.of(context).push(PageRouteBuilder(
                     opaque: true,
                     transitionDuration: const Duration(),
                     pageBuilder: (BuildContext context, _, __) {
@@ -132,28 +132,6 @@ class _MainScreenState extends State<MainScreen1> {
                     "Cancel");
               },
             ),
-            GButton(
-              icon: Icons.settings,
-              text: 'Settings',
-              onPressed: () {
-                Navigator.of(context).push(PageRouteBuilder(
-                    opaque: true,
-                    transitionDuration: const Duration(),
-                    pageBuilder: (BuildContext context, _, __) {
-                      return setting.Settings();
-                    },
-                    transitionsBuilder:
-                        (_, Animation<double> animation, __, Widget child) {
-                      return SlideTransition(
-                        position: Tween<Offset>(
-                          begin: const Offset(0, 100),
-                          end: Offset.zero,
-                        ).animate(animation),
-                        child: child,
-                      );
-                    }));
-              },
-            ),
           ]),
       appBar: AppBar(
         title: const Text('IMT(DC)'),
@@ -175,7 +153,7 @@ class _MainScreenState extends State<MainScreen1> {
                 height: 110,
                 width: (MediaQuery.of(context).size.width) / 1.1,
                 decoration: const BoxDecoration(
-                    color: Colors.deepPurpleAccent,
+                    color: Colors.deepOrange,
                     borderRadius:
                         BorderRadius.only(topLeft: Radius.circular(50))),
                 child: Container(
@@ -340,7 +318,11 @@ class _MainScreenState extends State<MainScreen1> {
     );
   }
 
-  Future<void> _createxcel() async {}
+  Future<void> _createxcel() async {
+    ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+      content: Text("Coming soon- stay tuned!!"),
+    ));
+  }
 
   Future<void> _createPDF() async {
     PdfDocument doc = PdfDocument();

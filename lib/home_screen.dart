@@ -7,6 +7,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:attendance_app/utilities/constants.dart';
+import 'package:flutter_dynamic_icon/flutter_dynamic_icon.dart';
 import 'package:flutter_swiper/flutter_swiper.dart';
 import 'package:getwidget/components/carousel/gf_carousel.dart';
 import 'package:google_nav_bar/google_nav_bar.dart';
@@ -20,7 +21,7 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  Color _favIconColor = Colors.deepPurpleAccent;
+  final Color _favIconColor = Colors.deepPurpleAccent;
   int _currentIndex = 0;
   static double currentatt = 0.50;
 
@@ -35,7 +36,25 @@ class _HomeScreenState extends State<HomeScreen> {
   }
 
   String username = "Jaivardhan Shukla";
-  int academicnotofications = 10;
+  static int academicnotofications = 1;
+
+  @override
+  void initState() {
+    _showouternotifications(context);
+    super.initState();
+  }
+
+  _showouternotifications(BuildContext context) async {
+    try {
+      await FlutterDynamicIcon.setApplicationIconBadgeNumber(
+          academicnotofications);
+    } on PlatformException {
+      print('Exception: platform not supported for icon badge');
+    } catch (e) {
+      print(e);
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -49,16 +68,16 @@ class _HomeScreenState extends State<HomeScreen> {
               icon: Icons.home,
               text: 'Home',
               onPressed: () {
-                Navigator.of(context).push(new PageRouteBuilder(
+                Navigator.of(context).push(PageRouteBuilder(
                     opaque: true,
                     transitionDuration: const Duration(),
                     pageBuilder: (BuildContext context, _, __) {
-                      return new HomeScreen();
+                      return HomeScreen();
                     },
                     transitionsBuilder:
                         (_, Animation<double> animation, __, Widget child) {
-                      return new SlideTransition(
-                        position: new Tween<Offset>(
+                      return SlideTransition(
+                        position: Tween<Offset>(
                           begin: const Offset(0, 100),
                           end: Offset.zero,
                         ).animate(animation),
@@ -68,25 +87,10 @@ class _HomeScreenState extends State<HomeScreen> {
               },
             ),
             GButton(
-              icon: Icons.settings,
-              text: 'Settings',
+              icon: Icons.logout,
+              text: 'Logout',
               onPressed: () {
-                Navigator.of(context).push(new PageRouteBuilder(
-                    opaque: true,
-                    transitionDuration: const Duration(),
-                    pageBuilder: (BuildContext context, _, __) {
-                      return new Settings();
-                    },
-                    transitionsBuilder:
-                        (_, Animation<double> animation, __, Widget child) {
-                      return new SlideTransition(
-                        position: new Tween<Offset>(
-                          begin: const Offset(0, 100),
-                          end: Offset.zero,
-                        ).animate(animation),
-                        child: child,
-                      );
-                    }));
+                //implement later
               },
             ),
           ]),
@@ -100,11 +104,13 @@ class _HomeScreenState extends State<HomeScreen> {
               shape: BadgeShape.circle,
               animationDuration: const Duration(seconds: 1),
               badgeColor: Colors.orangeAccent,
-              padding: const EdgeInsets.all(10),
+              padding: const EdgeInsets.only(
+                  top: 20, bottom: 20, left: 10, right: 10),
               badgeContent: Text('$academicnotofications'),
               position: BadgePosition.topStart(),
               child: IconButton(
                 onPressed: () {
+                  _showouternotifications(context);
                   Navigator.push(
                     context,
                     MaterialPageRoute(builder: (context) => const ProfAlert()),
@@ -124,9 +130,11 @@ class _HomeScreenState extends State<HomeScreen> {
         title: Text(
           'Hi, $username',
           style: const TextStyle(
-              fontWeight: FontWeight.bold, color: Colors.black, fontSize: 20),
+            fontWeight: FontWeight.bold,
+            color: Colors.black,
+          ),
         ),
-        centerTitle: false,
+        centerTitle: true,
       ),
       body: Scaffold(
           body: Column(
@@ -144,7 +152,7 @@ class _HomeScreenState extends State<HomeScreen> {
                       borderRadius:
                           const BorderRadius.all(Radius.circular(20.0)),
                       child: Card(
-                        color: Colors.deepPurpleAccent,
+                        color: Colors.deepOrange,
                         elevation: 10,
                         child: card,
                       ),
@@ -249,8 +257,8 @@ class Item1 extends StatelessWidget {
                   1
                 ],
                 colors: [
-                  Colors.deepPurpleAccent,
-                  Colors.deepPurpleAccent,
+                  Colors.deepOrange,
+                  Colors.deepOrange,
                 ]),
           ),
           child: Column(
@@ -333,8 +341,8 @@ class Item2 extends StatelessWidget {
                   1
                 ],
                 colors: [
-                  Colors.deepPurpleAccent,
-                  Colors.deepPurpleAccent,
+                  Colors.deepOrange,
+                  Colors.deepOrange,
                 ]),
           ),
           child: Column(
@@ -417,8 +425,8 @@ class Item3 extends StatelessWidget {
                   1
                 ],
                 colors: [
-                  Colors.deepPurpleAccent,
-                  Colors.deepPurpleAccent,
+                  Colors.deepOrange,
+                  Colors.deepOrange,
                 ]),
           ),
           child: Column(
@@ -426,7 +434,7 @@ class Item3 extends StatelessWidget {
             children: <Widget>[
               const Text("Underground Metalliferous Mining",
                   style: TextStyle(
-                      color: Colors.amber,
+                      color: Colors.black,
                       fontSize: 20.0,
                       fontWeight: FontWeight.bold)),
               Container(
@@ -454,7 +462,7 @@ class Item3 extends StatelessWidget {
                             const Text(
                               'Your current attendance: ${0.4 * 100}%',
                               style: const TextStyle(
-                                  color: Colors.amber,
+                                  color: Colors.black,
                                   fontWeight: FontWeight.bold),
                             ),
                             const SizedBox(
@@ -462,14 +470,14 @@ class Item3 extends StatelessWidget {
                             ),
                             Text(
                               'Total classes: ${curatt * 100}',
-                              style: const TextStyle(color: Colors.amber),
+                              style: const TextStyle(color: Colors.black),
                             ),
                             const SizedBox(
                               height: 10,
                             ),
                             Text(
                               'Classes attended: ${curatt * 100}',
-                              style: const TextStyle(color: Colors.amber),
+                              style: const TextStyle(color: Colors.black),
                             )
                           ],
                         ),
@@ -500,8 +508,8 @@ class Item4 extends StatelessWidget {
                   1
                 ],
                 colors: [
-                  Colors.deepPurpleAccent,
-                  Colors.deepPurpleAccent,
+                  Colors.deepOrange,
+                  Colors.deepOrangeAccent,
                 ]),
           ),
           child: Column(
@@ -509,7 +517,7 @@ class Item4 extends StatelessWidget {
             children: <Widget>[
               const Text("IMT",
                   style: TextStyle(
-                      color: Colors.white,
+                      color: Colors.black,
                       fontSize: 20.0,
                       fontWeight: FontWeight.bold)),
               Container(
@@ -537,7 +545,7 @@ class Item4 extends StatelessWidget {
                             Text(
                               'Your current attendance: ${curatt * 100}',
                               style: const TextStyle(
-                                  color: Colors.white,
+                                  color: Colors.black,
                                   fontWeight: FontWeight.bold),
                             ),
                             const SizedBox(
@@ -545,14 +553,14 @@ class Item4 extends StatelessWidget {
                             ),
                             Text(
                               'Total classes: ${curatt * 100}',
-                              style: const TextStyle(color: Colors.white),
+                              style: const TextStyle(color: Colors.black),
                             ),
                             const SizedBox(
                               height: 10,
                             ),
                             Text(
                               'Classes attended: ${curatt * 100}',
-                              style: const TextStyle(color: Colors.white),
+                              style: const TextStyle(color: Colors.black),
                             )
                           ],
                         ),
