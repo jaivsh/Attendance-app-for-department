@@ -1,14 +1,15 @@
+import 'package:attendance_app/helppage.dart';
 import 'package:attendance_app/home_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/services.dart';
 import 'package:google_nav_bar/google_nav_bar.dart';
 
-class Settings extends StatefulWidget {
-  const Settings({super.key});
+class Settingspage extends StatefulWidget {
+  Settingspage({super.key});
 
   @override
-  State<Settings> createState() => _SettingsState();
+  State<Settingspage> createState() => _SettingspageState();
 }
 
 Widget _notificationsList(
@@ -33,7 +34,8 @@ Widget _notificationsList(
   );
 }
 
-class _SettingsState extends State<Settings> {
+class _SettingspageState extends State<Settingspage> {
+  Color _colorContainer = Colors.white;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -51,7 +53,7 @@ class _SettingsState extends State<Settings> {
                   opaque: true,
                   transitionDuration: const Duration(),
                   pageBuilder: (BuildContext context, _, __) {
-                    return Settings();
+                    return Settingspage();
                   },
                 ));
               },
@@ -80,6 +82,52 @@ class _SettingsState extends State<Settings> {
       body: Container(
         padding: const EdgeInsets.all(15),
         child: Column(children: [
+          Ink(
+              padding: const EdgeInsets.only(
+                bottom: 10,
+              ),
+              child: InkWell(
+                child: Card(
+                  elevation: 5,
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(5.0),
+                  ),
+                  child: Container(
+                    padding: const EdgeInsets.all(10),
+                    width: MediaQuery.of(context).size.width,
+                    height: 75,
+                    color: _colorContainer,
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: const [
+                        Text(
+                          'Application FAQ\'s',
+                          style: TextStyle(
+                              fontWeight: FontWeight.bold, fontSize: 18),
+                        ),
+                        SizedBox(
+                          height: 10,
+                        ),
+                        Text(
+                          'Help related to the application\'s usage and functionality',
+                        )
+                      ],
+                    ),
+                  ),
+                ),
+                onTap: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => const HelpPage()),
+                  );
+                  setState(() {
+                    _colorContainer = _colorContainer == Colors.white
+                        ? Colors.white38
+                        : Colors.white;
+                  });
+                },
+              )),
           SizedBox(
             width: MediaQuery.of(context).size.width,
             height: 50,

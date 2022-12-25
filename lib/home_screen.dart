@@ -87,10 +87,25 @@ class _HomeScreenState extends State<HomeScreen> {
               },
             ),
             GButton(
-              icon: Icons.logout,
-              text: 'Logout',
+              icon: Icons.settings,
+              text: 'Settings',
               onPressed: () {
-                //implement later
+                Navigator.of(context).push(PageRouteBuilder(
+                    opaque: true,
+                    transitionDuration: const Duration(),
+                    pageBuilder: (BuildContext context, _, __) {
+                      return Settingspage();
+                    },
+                    transitionsBuilder:
+                        (_, Animation<double> animation, __, Widget child) {
+                      return SlideTransition(
+                        position: Tween<Offset>(
+                          begin: const Offset(0, 100),
+                          end: Offset.zero,
+                        ).animate(animation),
+                        child: child,
+                      );
+                    }));
               },
             ),
           ]),

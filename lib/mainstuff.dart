@@ -2,6 +2,7 @@ import 'package:attendance_app/home_screen.dart';
 import 'package:attendance_app/login_screen.dart';
 import 'package:attendance_app/prof_alerts.dart';
 import 'package:attendance_app/settings.dart' as setting;
+import 'package:attendance_app/settings.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -130,6 +131,28 @@ class _MainScreenState extends State<MainScreen1> {
                     "Export table",
                     "Ok",
                     "Cancel");
+              },
+            ),
+            GButton(
+              icon: Icons.settings,
+              text: 'Settings',
+              onPressed: () {
+                Navigator.of(context).push(PageRouteBuilder(
+                    opaque: true,
+                    transitionDuration: const Duration(),
+                    pageBuilder: (BuildContext context, _, __) {
+                      return Settingspage();
+                    },
+                    transitionsBuilder:
+                        (_, Animation<double> animation, __, Widget child) {
+                      return new SlideTransition(
+                        position: new Tween<Offset>(
+                          begin: const Offset(0, 100),
+                          end: Offset.zero,
+                        ).animate(animation),
+                        child: child,
+                      );
+                    }));
               },
             ),
           ]),
@@ -319,7 +342,7 @@ class _MainScreenState extends State<MainScreen1> {
   }
 
   Future<void> _createxcel() async {
-    ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+    ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
       content: Text("Coming soon- stay tuned!!"),
     ));
   }
@@ -346,10 +369,10 @@ class _MainScreenState extends State<MainScreen1> {
     );
     page.graphics.drawImage(
         PdfBitmap(await _readImageData('vnitnagpurlogo.png')),
-        Rect.fromLTWH(0, 0, 80, 80));
+        const Rect.fromLTWH(0, 0, 80, 80));
 
     page.graphics
-        .drawLine(linePen, Offset(0, 100), Offset(pageSize.width, 100));
+        .drawLine(linePen, const Offset(0, 100), Offset(pageSize.width, 100));
 
     PdfGrid grid = PdfGrid();
     grid.style = PdfGridStyle(
